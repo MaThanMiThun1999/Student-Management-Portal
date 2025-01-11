@@ -20,62 +20,62 @@ const StudentList = ({ students, onEdit, onDelete }) => {
 
   return (
     <div className='overflow-x-auto'>
-      <h2 className='text-4xl font-bold mb-4'>Students List</h2>
+      <h2 className='text-4xl font-bold text-center mb-4'>Students List</h2>
       <table className='min-w-full divide-y divide-gray-200 dark:divide-gray-700'>
         <thead className='bg-gray-50 rounded-full'>
           <tr>
             <th
               scope='col'
-              className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
+              className='px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
             >
               Student ID
             </th>
             <th
               scope='col'
-              className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
+              className='px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
             >
               Name
             </th>
             <th
               scope='col'
-              className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
+              className='px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
             >
               Phone
             </th>
             <th
               scope='col'
-              className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
+              className='px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
             >
               DOB
             </th>
             <th
               scope='col'
-              className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
+              className='px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
             >
               Grade
             </th>
             <th
               scope='col'
-              className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
+              className='px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
             >
               Parent Name
             </th>
             <th
               scope='col'
-              className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
+              className='px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
             >
               Parent Phone
             </th>
             <th
               scope='col'
-              className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
+              className='px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
             >
               Address
             </th>
             <th
               scope='col'
               colSpan={2}
-              className='relative text-black px-6 py-3'
+              className='relative text-black px-2 py-3'
             >
               Actions
             </th>
@@ -85,12 +85,12 @@ const StudentList = ({ students, onEdit, onDelete }) => {
           {students.length > 0 ? (
             students.map((student) => (
               <tr key={student._id}>
-                <td className='px-6 py-4 whitespace-nowrap'>
+                <td className='px-2 py-4 whitespace-nowrap'>
                   <div className='text-sm text-gray-900'>
                     {student.studentId}
                   </div>
                 </td>
-                <td className='px-6 py-4 whitespace-nowrap'>
+                <td className='px-2 py-4 whitespace-nowrap'>
                   <div className='flex items-center'>
                     <div>
                       <div className='text-sm font-medium text-gray-900'>
@@ -102,36 +102,36 @@ const StudentList = ({ students, onEdit, onDelete }) => {
                     </div>
                   </div>
                 </td>
-                <td className='px-6 py-4 whitespace-nowrap'>
+                <td className='px-2 py-4 whitespace-nowrap'>
                   <div className='text-sm text-gray-900'>
                     {student.phoneNumber}
                   </div>
                 </td>
-                <td className='px-6 py-4 whitespace-nowrap'>
+                <td className='px-2 py-4 whitespace-nowrap'>
                   <div className='text-sm text-gray-900'>
                     {formatCustomDate(student.dateOfBirth, 'D-MMM-YYYY')}
                   </div>
                 </td>
-                <td className='px-6 py-4 whitespace-nowrap'>
+                <td className='px-2 py-4 whitespace-nowrap'>
                   <div className='text-sm text-gray-900'>
                     {student.gradeLevel}
                   </div>
                 </td>
-                <td className='px-6 py-4 whitespace-nowrap'>
+                <td className='px-2 py-4 whitespace-nowrap'>
                   <div className='text-sm text-gray-900'>
                     {student.parentName}
                   </div>
                 </td>
-                <td className='px-6 py-4 whitespace-nowrap'>
+                <td className='px-2 py-4 whitespace-nowrap'>
                   <div className='text-sm text-gray-900'>
                     {student.parentPhoneNumber}
                   </div>
                 </td>
-                <td className='px-6 py-4 whitespace-nowrap'>
-                  <div className='text-sm text-gray-900'>{student.address}</div>
+                <td className='px-2 py-4 whitespace-nowrap'>
+                  <div className='text-sm text-gray-900'>{student.address.length > 20 ? `${student.address.substring(0, 20)}...` : student.address}</div>
                 </td>
                 {/* Other table data */}
-                <td className='px-6 py-4 whitespace-nowrap text-right text-sm font-medium'>
+                <td className='px-4 py-4 whitespace-nowrap text-right text-sm font-medium'>
                   <button
                     onClick={() => handleEdit(student)}
                     className='text-indigo-600 hover:text-indigo-900'
@@ -139,7 +139,7 @@ const StudentList = ({ students, onEdit, onDelete }) => {
                     <Pencil className='h-5 w-5' />
                   </button>
                 </td>
-                <td className='px-6 py-4 whitespace-nowrap text-right text-sm font-medium'>
+                <td className='px-4 py-4 whitespace-nowrap text-right text-sm font-medium'>
                   <button
                     className='text-red-500 hover:text-red-800'
                     onClick={() => handleDelete(student._id)}

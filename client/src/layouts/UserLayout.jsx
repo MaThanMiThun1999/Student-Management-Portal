@@ -19,7 +19,7 @@ const UserLayout = () => {
       </div>
       <ParticlesBackground />
 
-      <main className='relative container mx-auto h-screen'>
+      <main className='relative container mx-auto pb-5 divide-gray-200 dark:divide-gray-700'>
         <Outlet />
       </main>
     </div>

@@ -9,15 +9,15 @@ const generateToken = (userID) => {
 
 const generateTokenAndSetCookie = (res, userID) => {
   const token = generateToken(userID);
-  res.cookie("token", token, {
+  res.cookie('token', token, {
     httpOnly: true,
     secure: true,
-    sameSite: "none",
+    sameSite: 'none',
     maxAge: 7 * 24 * 60 * 60 * 1000,
   });
 
-  const cookieHeader = res.getHeader("Set-Cookie");
-  console.log("Set-Cookie header:", formatCookieHeader(cookieHeader));
+  const cookieHeader = res.getHeader('Set-Cookie');
+  console.log('Set-Cookie header:', formatCookieHeader(cookieHeader));
 
   return token;
 };
