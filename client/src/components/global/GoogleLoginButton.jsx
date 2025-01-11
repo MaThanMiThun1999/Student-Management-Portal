@@ -4,10 +4,10 @@ import axios from '../../services/axiosInstance';
 import toast from 'react-hot-toast';
 
 const GoogleButtons = ({ chooseBtn = 'login' }) => {
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
 
-  const handleGoogleLogin = async response => {
-    setLoading(true);
+  const handleGoogleLogin = async (response) => {
+    setLoading(true); 
     try {
       const token = response.credential;
       const res = await axios.post('/auth/google', { token, action: 'login' });
@@ -22,16 +22,16 @@ const GoogleButtons = ({ chooseBtn = 'login' }) => {
         );
       } else {
         console.debug('Error authenticating with Google:', error);
-        toast.error(error.response?.data?.message || 'Login failed');
+        toast.error(error.response.data.message || 'Login failed');
       }
       console.error('Google login failed:', error);
     } finally {
-      setLoading(false);
+      setLoading(false); // Stop loading
     }
   };
 
-  const handleGoogleSignup = async response => {
-    setLoading(true);
+  const handleGoogleSignup = async (response) => {
+    setLoading(true); // Start loading
     try {
       const token = response.credential;
       const res = await axios.post('/auth/google', { token, action: 'signup' });
@@ -46,7 +46,7 @@ const GoogleButtons = ({ chooseBtn = 'login' }) => {
         );
       } else {
         console.debug('Error authenticating with Google:', error);
-        toast.error(error.response?.data?.message || 'Signup failed');
+        toast.error(error.response.data.message || 'Signup failed');
       }
       console.error('Google signup failed:', error);
     } finally {
@@ -55,63 +55,49 @@ const GoogleButtons = ({ chooseBtn = 'login' }) => {
   };
 
   return (
-    <div style={{ position: 'relative', display: 'inline-block', width: '100%' }}>
+    <div className='relative w-full'>
       {loading && (
-        <div style={styles.loadingOverlay}>
-          <div style={styles.spinner}></div>
+        <div className='absolute inset-0 flex items-center justify-center bg-[#5194EE] rounded-md z-10'>
+          <div className='w-8 h-8 border-4 border-blue-200 border-t-transparent rounded-full animate-spin'></div>
+          <span className='ml-2 font-bold text-plain-white-background'>
+            Please wait
+            <span className='animate-ping'>.</span>
+            <span className='animate-ping'>.</span>
+            <span className='animate-ping'>.</span>
+          </span>
         </div>
       )}
-      {chooseBtn === 'login' ? (
-        <GoogleLogin
-          auto_select
-          shape="rectangular"
-          type="standard"
-          useOneTap
-          width="100%"
-          text="signin_with"
-          theme="filled_blue"
-          onSuccess={handleGoogleLogin}
-          onError={handleGoogleLogin}
-        />
-      ) : (
-        <GoogleLogin
-          auto_select
-          shape="rectangular"
-          type="standard"
-          width="100%"
-          useOneTap
-          text="signup_with"
-          theme="filled_blue"
-          onSuccess={handleGoogleSignup}
-          onError={handleGoogleSignup}
-        />
-      )}
+
+      {/* Google Button */}
+      <div className={`${loading ? 'opacity-50 pointer-events-none' : ''}`}>
+        {chooseBtn === 'login' ? (
+          <GoogleLogin
+            auto_select
+            shape='rectangular'
+            type='standard'
+            useOneTap
+            width='100%'
+            text='signin_with'
+            theme='filled_blue'
+            onSuccess={handleGoogleLogin}
+            onError={handleGoogleLogin}
+          />
+        ) : (
+          <GoogleLogin
+            auto_select
+            shape='rectangular'
+            type='standard'
+            width='100%'
+            useOneTap
+            text='signup_with'
+            theme='filled_blue'
+            onSuccess={handleGoogleSignup}
+            onError={handleGoogleSignup}
+          />
+        )}
+      </div>
     </div>
   );
-};
-
-const styles = {
-  loadingOverlay: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: 'rgba(255, 255, 255, 0.8)',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    zIndex: 10,
-    borderRadius: '4px',
-  },
-  spinner: {
-    width: '40px',
-    height: '40px',
-    border: '4px solid rgba(0, 0, 0, 0.1)',
-    borderTop: '4px solid #3498db',
-    borderRadius: '50%',
-    animation: 'spin 1s linear infinite',
-  },
 };
 
 export default GoogleButtons;
